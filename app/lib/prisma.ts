@@ -1,0 +1,14 @@
+import { PrismaClient } from "@/generated/prisma/client";
+
+export const prisma = new PrismaClient();
+
+// Database helper function
+export async function checkDatabaseConnection(): Promise<boolean> {
+  try {
+    await prisma.$queryRaw`Select 1`;
+    return true;
+  } catch (error) {
+    console.log(`Database connection failed : ${error}`);
+    return false;
+  }
+}
